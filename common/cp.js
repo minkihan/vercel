@@ -5,7 +5,8 @@ const config = {
     password: "xkdlrj!2",
     database: 'postgres',
     port: 5432,
-    ssl: true
+    ssl: true,
+    idleTimeoutMillis: 600
 } ;
 //const pool = new Pool( config ) ;
 module.exports = new Pool( config ) ;
