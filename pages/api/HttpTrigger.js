@@ -14,14 +14,9 @@ export default async ( req, res ) => {
         // Release the connection
         client.release() ;
         // Return the query resuls back to the caller as JSON
-        context.res = {
-            status: 200,
-            isRaw: true,
-            body: result.rows,
-            headers: {
-                "Content-Type": "application/json"
-            }
-        } ;
+
+        res.statusCode = 200
+        res.json( result.rows )
     } catch ( err ) {
         context.log( err.message ) ;
     }
