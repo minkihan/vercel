@@ -1,6 +1,16 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import { Pool } from "pg" ;
+//const cp = require( "../../common/cp.js" ) ;
 
-const cp = require( "../../common/cp.js" ) ;
+const config = {
+    host: "minki.postgres.database.azure.com",
+    user: "ayakano5@minki",
+    password: "xkdlrj!2",
+    database: 'postgres',
+    port: 5432,
+    ssl: true
+} ;
+const pool = new Pool( config ) ;
 
 export default async ( req, res ) => {
     // Create query to execute against the database
@@ -10,7 +20,7 @@ export default async ( req, res ) => {
     try {
         // Execute the query against the client
         //const client = await common.DatasourcePostgresql.getClient() ;
-        const client = await cp.connect().getClient() ;
+        const client = await pool.connect().getClient() ;
         const result = await client.query( querySpec ) ;
         // Release the connection
         client.release() ;
