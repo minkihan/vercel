@@ -2,16 +2,6 @@
 import { Pool } from "pg" ;
 //const cp = require( "../../common/cp.js" ) ;
 
-const config = {
-    host: "minki.postgres.database.azure.com",
-    user: "ayakano5@minki",
-    password: "xkdlrj!2",
-    database: 'postgres',
-    port: 5432,
-    ssl: true
-} ;
-const pool = new Pool( config ) ;
-
 export default async ( req, res ) => {
     // Create query to execute against the database
     const querySpec = { 
@@ -20,7 +10,16 @@ export default async ( req, res ) => {
     try {
         // Execute the query against the client
         //const client = await common.DatasourcePostgresql.getClient() ;
-        const client = await pool.connect().getClient() ;
+        const config = {
+            host: "minki.postgres.database.azure.com",
+            user: "ayakano5@minki",
+            password: "xkdlrj!2",
+            database: 'postgres',
+            port: 5432,
+            ssl: true
+        } ;
+        const pool = new Pool( config ) ;
+        const client = await pool.connect() ;
         const result = await client.query( querySpec ) ;
         // Release the connection
         client.release() ;
